@@ -18,5 +18,8 @@
   "homepage": "https://github.com/lekhakharlampiev/mywed_testing#readme",
   "devDependencies": {
     "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "gulp-less": "^4.0.1"
   }
 }
