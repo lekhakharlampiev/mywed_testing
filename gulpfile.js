@@ -12,7 +12,7 @@ gulp.task('clean', function() {
     return del('dist');
 });
 gulp.task('build', gulp.series('clean', 'assets'));
-gulp.task('serve', function() {
+gulp.task('server', function() {
     browserSync.init({
         server: 'dist'
     });
