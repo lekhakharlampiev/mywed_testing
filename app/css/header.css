@@ -2,18 +2,6 @@
     margin-bottom: 50px;
     background-color: #191919;
 }
-.container {
-    display: flex;
-    justify-content: flex-end;
-    color: #d4d4d4;
-    font-family: PTSansBold, sans-serif;
-    font-size: 16px;
-    width: 80vw;
-    max-width: 1200px;
-    margin: 0;
-    margin-left: auto;
-    margin-right: auto;
-}
 .main-header__content__logo {
     display: flex;
     align-items: center;

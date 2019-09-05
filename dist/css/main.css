@@ -1,0 +1,67 @@
+.main {
+
+}
+.photographers {
+    display: flex;
+    flex-direction: column;
+}
+.photographers__title {
+    font-family: PTSansRegular, sans-serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: #484848;
+
+}
+.photographers__selection {
+    margin-bottom: 50px;
+    display: flex;
+}
+.photographers__selection__name-input,
+.photographers-select-city__input {
+    position: relative;
+    border: none;
+    outline: none;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 10px;
+}
+.photographers-select-city__input_border-color {
+    border-color: #333333;
+    border-radius: 5px 5px 0 0;
+    border-bottom-color: transparent;
+}
+.photographers-select-city {
+    margin-left: 10px;
+    position: relative;
+}
+.photographers-select-city__list {
+    width: 197px;
+    position: absolute;
+    border: 1px solid #333333;
+    border-radius: 0 0 5px 5px;
+    border-top-color: transparent;
+    list-style: none;
+    top: 38px;
+    left: 45px;
+    margin: 0;
+    padding: 0;
+}
+.photographers-select-city__list__item {
+    color: #333333;
+    cursor: pointer;
+    padding: 5px 10px;; 
+}
+.hidden {
+    display: none;
+}
+.photo {
+    overflow: hidden;
+    position: relative;
+    width: 320px;
+    height: 320px;
+}
+.photo > img {
+    left: -83px;
+    transform: scale(0.7);
+    position: absolute;
+}
