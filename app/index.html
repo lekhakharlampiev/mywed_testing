@@ -4,31 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
     <title>myWed</title>
 </head>
 <body>
     <header class="main-header">
-        <div class="main-header__content">
-            <a href="https://mywed.com" class="main-header__content__logo">mywed</a>
+        <div class="container">
+            <a href="https://mywed.com" class="main-header__content__logo">
+                <img src="img/logo.png" alt="logo">
+                <span>m&nbsp;y&nbsp;w&nbsp;e&nbsp;d</span>
+            </a>
             <nav class="main-menu">
                 <ul class="main__menu__list">
                     <li class="main-menu__item">Фотографы</li>
                     <li class="main-menu__item">Фотографии</li>
                     <li class="main-menu__item">Свадьбы</li>
                     <li class="main-menu__item">Форум</li>
-                    <li class="main-menu__item">MyWed Adward</li>
+                    <li class="main-menu__item main-menu__item_yellow">MyWed Adward</li>
                 </ul>
             </nav>
             <div class="user-menu">
                 <a href="/" class="user-registration">Зарегистрироваться</a>
                 <a href="/" class="user-input">Войти</a>
-                <a href="/" class="user-search"></a>
+                <a class="user-search"><div class="user-search__icon"></div></a>
             </div>    
         </div>    
     </header>
     <main class="main">
-        <div class="main__content">
-            <section class="selection-parameters">
+        <div class="photographers container">
+            <h2 class="photographers__title">Свадебные фотографы:</h2>
+            <section class="photographers__selection">
+                <div class="photographers-select-name">
+                    <label for=photographer-name>Имя</label>
+                    <input type="text" id="photographer-name" class="photographers__selection__name-input">
+                </div>    
+                <div class="photographers-select-city">
+                    <label for=photographer-name>Город</label>
+                    <input id="photographer-name" class="photographers-select-city__input">
+                    <ul class="photographers-select-city__list hidden">
+                        <li class="photographers-select-city__list__item">Рязань</li>
+                        <li class="photographers-select-city__list__item">Москва</li>
+                        <li class="photographers-select-city__list__item">Санкт-петербург</li>
+                    </ul>   
+                </div>    
             </section>
         </div>
     </main>
