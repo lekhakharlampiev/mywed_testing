@@ -122,27 +122,49 @@ let photos_db = [
 ];
 
 const photoContainer = document.querySelector('.js-photos__container');
-//рендерятся все фотографии по умолчанию
-photos_db.map((item) => {
-    let img = document.createElement('img');
-    img.className = 'js-img-photo';
-    img.src = 'photos/' + item.src;
-    let photo = document.createElement('div');
-    photo.className = 'photo js-photo';
-    let title = document.createElement('h4');
-    title.prepend(item.name);
-    let city = document.createElement('p');
-    city.prepend(item.city);
-    let button = document.createElement('button');
-    button.className = 'photo__botton-close hidden js-photo__botton-close';
-    button.type = 'button';
-    button.title = 'Закрыть';
-    photo.prepend(city);
-    photo.prepend(title);
-    photo.prepend(button);
-    photo.append(img);
-    photoContainer.prepend(photo);
-});
+
+
+//рендер всех фото по умолчанию
+const renderPhotos = (arr) => {
+    return arr.map((item) => {
+        let img = document.createElement('img');
+        img.className = 'js-img-photo';
+        img.src = 'photos/' + item.src;
+        let photo = document.createElement('div');
+        photo.className = 'photo js-photo';
+        let title = document.createElement('h4');
+        title.prepend(item.name);
+        let city = document.createElement('p');
+        city.prepend(item.city);
+        let button = document.createElement('button');
+        button.className = 'photo__botton-close hidden js-photo__botton-close';
+        button.type = 'button';
+        button.title = 'Закрыть';
+        photo.prepend(city);
+        photo.prepend(title);
+        photo.prepend(button);
+        photo.append(img);
+        photoContainer.prepend(photo);
+    });
+}
+renderPhotos(photos_db);
+
+const photo = document.querySelectorAll('.js-photo');
+
+//обработчик клика для фото
+const addListenerToPhoto = () => {
+    const photo = document.querySelectorAll('.js-photo');
+    for(let i = 0; i < photo.length; i++) {
+        photo[i].addEventListener('click', function(evt) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.classList.toggle('photo-popup-open');
+            this.firstElementChild.classList.toggle('hidden');
+            this.lastElementChild.classList.toggle('img-full-screen');
+        });
+    }
+};
+addListenerToPhoto();
 
 const inputName = document.querySelector('.js-name-input');
 const citySearchInput = document.querySelector('.js-photographers-select-city__input');
@@ -174,7 +196,8 @@ inputName.addEventListener('input', function() {
                 photo.append(img);
                 photoContainer.prepend(photo) 
             }
-        }) 
+        });
+        addListenerToPhoto(); 
     }
     else if (event.target.value && citySearchInput.value) {
             photos_db.map((item) => {
@@ -198,31 +221,14 @@ inputName.addEventListener('input', function() {
                 photo.append(img);
                 photoContainer.prepend(photo); 
             }
-        }) 
+        });
+        addListenerToPhoto(); 
     } 
     
     else if (!event.target.value) {
         photoContainer.innerHTML = "";
-        photos_db.map((item) => {
-                let img = document.createElement('img');
-                img.className = 'js-img-photo';
-                img.src = 'photos/' + item.src;
-                let photo = document.createElement('div');
-                photo.className = 'photo js-photo';
-                let title = document.createElement('h4');
-                title.prepend(item.name);
-                let city = document.createElement('p');
-                city.prepend(item.city);
-                let button = document.createElement('button');
-                button.className = 'photo__botton-close hidden js-photo__botton-close';
-                button.type = 'button';
-                button.title = 'Закрыть';
-                photo.prepend(city);
-                photo.prepend(title);
-                photo.prepend(button);
-                photo.append(img);
-                photoContainer.prepend(photo);
-        })
+        renderPhotos(photos_db);
+        addListenerToPhoto();
     }
 });
 
@@ -251,7 +257,8 @@ const searchByCity = (value) => {
                 photo.append(img);
                 photoContainer.prepend(photo) 
             }
-        }); 
+        });
+        addListenerToPhoto(); 
     }
 } 
 //если выбирается какой то город то срабатывает фильтр по городу
@@ -272,18 +279,3 @@ citySearchInput.addEventListener('click', function() {
             citySearchInput.classList.remove('photographers-select-city__input_border-color');
         }
     });
-
-    const photo = document.querySelectorAll('.js-photo');
-    const photoCloseButton = document.querySelectorAll('.js-photo__botton-close');
-    const imgPhoto = document.querySelectorAll('.js-img-photo');
-
-    for(let i = 0; i < photo.length; i++) {
-        photo[i].addEventListener('click', function(evt) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.classList.toggle('photo-popup-open');
-            this.firstElementChild.classList.toggle('hidden');
-            this.lastElementChild.classList.toggle('img-full-screen');
-        })
-    }
-

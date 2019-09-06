@@ -12,6 +12,7 @@
 .photographers__selection {
     margin-bottom: 50px;
     display: flex;
+    align-items: center;
 }
 .photographers-select-name {
     display: flex;
@@ -23,6 +24,9 @@
 }
 .photographers__selection__name-input,
 .photographers-select-city__input {
+    font-family: PTSansBold, sans-serif;
+    font-size: 16px;
+    line-height: 18px;
     position: relative;
     border: none;
     outline: none;
@@ -57,9 +61,27 @@
     padding: 0;
 }
 .photographers-select-city__list__item {
+    font-family: PTSansRegular, sans-serif;
     color: #333333;
     cursor: pointer;
-    padding: 5px 10px;; 
+    padding: 10px; 
+}
+.reset-filter {
+    display: flex;
+    margin-top: auto;
+    margin-left: 10px;
+}
+.reset-filter__button {
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: inherit;
+    padding: 10px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+}
+.reset-filter__button:focus {
+    outline: none;
 }
 .hidden {
     display: none;
@@ -67,6 +89,7 @@
 .photos__container {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
     justify-content: space-between;
     margin-right: -5px;
 }
