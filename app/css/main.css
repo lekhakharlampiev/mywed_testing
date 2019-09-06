@@ -44,7 +44,7 @@
     border-top-color: transparent;
     list-style: none;
     top: 38px;
-    left: 44px;
+    left: 45px;
     margin: 0;
     padding: 0;
 }
@@ -75,6 +75,14 @@
     left: -83px;
     transform: scale(0.9);
     position: absolute;
+}
+.photo > h4 {
+    margin: 0;
+    padding: 0;
+}
+.photo > p {
+    margin: 0;
+    padding: 0;
 }
 .photo__botton-close {
     width: 30px;
@@ -131,4 +139,17 @@
     box-shadow: 0 0 10px 5px #4f4f4f;
     height: 640px;
     
+}
+.photo-popup-open h4,
+.photo-popup-open p {
+    z-index: 150;
+    position: absolute;
+    top: calc(50% - 360px);
+}
+.photo-popup-open h4 {
+    right: 20%;
+}
+.photo-popup-open p {
+    top: calc(50% - 340px);
+    right: 20%;
 }

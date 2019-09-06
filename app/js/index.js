@@ -120,7 +120,9 @@ let photos_db = [
         city: 'Санкт Петербург'
     }
 ];
+
 const photoContainer = document.querySelector('.js-photos__container');
+//рендерятся все фотографии по умолчанию
 photos_db.map((item, index) => {
     let img = document.createElement('img');
     img.className = 'js-img-photo';
@@ -140,28 +142,17 @@ photos_db.map((item, index) => {
     photo.prepend(button);
     photo.append(img);
     photoContainer.prepend(photo);
-})
+});
 
-//for (let i = 0; i < photos_db.length; i++) {
-//    let img = document.createElement('img');
-//    img.className = 'js-img-photo';
-//    img.src = 'photos/' + photos_db[i].src;
-//    let photo = document.createElement('div');
-//    photo.className = 'photo js-photo';
-//    let button = document.createElement('button');
-//    button.className = 'photo__botton-close hidden js-photo__botton-close';
-//    button.type = 'button';
-//    button.title = 'Закрыть';
-//    photo.prepend(button);
-//    photo.append(img);
-//    photoContainer.appendChild(photo)
-    
-//}
 const inputName = document.querySelector('.js-name-input');
+const citySearchInput = document.querySelector('.js-photographers-select-city__input');
+const citySearchSelectList = document.querySelector('.js-photographers-select-city__list');
+const citeSelectItem = document.querySelectorAll('.js-photographers-select-city__list__item');
 
+//фильтр по имени
 inputName.addEventListener('input', function() {
     photoContainer.innerHTML = "";
-    if(event.target.value) {
+    if(event.target.value && !citySearchInput.value) {
         photos_db.map((item, index) => {
             if(item.name.toLowerCase().includes(event.target.value.toLowerCase())) {
                 let img = document.createElement('img');
@@ -183,8 +174,34 @@ inputName.addEventListener('input', function() {
                 photo.append(img);
                 photoContainer.prepend(photo) 
             }
-        })
-    } else if (!event.target.value) {
+        }) 
+    }
+    else if (event.target.value && citySearchInput.value) {
+            photos_db.map((item, index) => {
+            if(item.name.toLowerCase().includes(event.target.value.toLowerCase()) && item.city.toLowerCase().includes(citySearchInput.value.toLowerCase())) {
+                let img = document.createElement('img');
+                img.className = 'js-img-photo';
+                img.src = 'photos/' + item.src;
+                let photo = document.createElement('div');
+                photo.className = 'photo js-photo';
+                let title = document.createElement('h4');
+                title.prepend(item.name);
+                let city = document.createElement('p');
+                city.prepend(item.city);
+                let button = document.createElement('button');
+                button.className = 'photo__botton-close hidden js-photo__botton-close';
+                button.type = 'button';
+                button.title = 'Закрыть';
+                photo.prepend(city);
+                photo.prepend(title);
+                photo.prepend(button);
+                photo.append(img);
+                photoContainer.prepend(photo); 
+            }
+        }) 
+    } 
+    
+    else if (!event.target.value) {
         photoContainer.innerHTML = "";
         photos_db.map((item, index) => {
                 let img = document.createElement('img');
@@ -207,12 +224,47 @@ inputName.addEventListener('input', function() {
                 photoContainer.prepend(photo);
         })
     }
-    });
+});
 
-const citySearchInput = document.querySelector('.js-photographers-select-city__input');
-const citySearchSelectList = document.querySelector('.js-photographers-select-city__list');
+//фильтр по городу
+const searchByCity = (value) => {
+    photoContainer.innerHTML = "";
+    if(value) {
+        photos_db.map((item, index) => {
+            if(item.city.toLowerCase().includes(value.toLowerCase())) {
+                let img = document.createElement('img');
+                img.className = 'js-img-photo';
+                img.src = 'photos/' + item.src;
+                let photo = document.createElement('div');
+                photo.className = 'photo js-photo';
+                let title = document.createElement('h4');
+                title.prepend(item.name);
+                let city = document.createElement('p');
+                city.prepend(item.city);
+                let button = document.createElement('button');
+                button.className = 'photo__botton-close hidden js-photo__botton-close';
+                button.type = 'button';
+                button.title = 'Закрыть';
+                photo.prepend(city);
+                photo.prepend(title);
+                photo.prepend(button);
+                photo.append(img);
+                photoContainer.prepend(photo) 
+            }
+        }); 
+    }
+} 
+//если выбирается какой то город то срабатывает фильтр по городу
+for(let i = 0; i < citeSelectItem.length; i++) {
+    citeSelectItem[i].addEventListener('click', function() {
+        let input = citySearchInput;
+        input.value = event.target.textContent;
+        searchByCity(input.value);
+        
+    })
+}
 
-citySearchInput.addEventListener('click', () => {
+citySearchInput.addEventListener('click', function() {
     citySearchSelectList.classList.toggle('hidden');
         if (!citySearchSelectList.classList.contains('hidden')) {
             citySearchInput.classList.add('photographers-select-city__input_border-color');
