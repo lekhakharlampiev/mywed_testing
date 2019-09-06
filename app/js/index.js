@@ -120,6 +120,94 @@ let photos_db = [
         city: 'Санкт Петербург'
     }
 ];
+const photoContainer = document.querySelector('.js-photos__container');
+photos_db.map((item, index) => {
+    let img = document.createElement('img');
+    img.className = 'js-img-photo';
+    img.src = 'photos/' + item.src;
+    let photo = document.createElement('div');
+    photo.className = 'photo js-photo';
+    let title = document.createElement('h4');
+    title.prepend(item.name);
+    let city = document.createElement('p');
+    city.prepend(item.city);
+    let button = document.createElement('button');
+    button.className = 'photo__botton-close hidden js-photo__botton-close';
+    button.type = 'button';
+    button.title = 'Закрыть';
+    photo.prepend(city);
+    photo.prepend(title);
+    photo.prepend(button);
+    photo.append(img);
+    photoContainer.prepend(photo);
+})
+
+//for (let i = 0; i < photos_db.length; i++) {
+//    let img = document.createElement('img');
+//    img.className = 'js-img-photo';
+//    img.src = 'photos/' + photos_db[i].src;
+//    let photo = document.createElement('div');
+//    photo.className = 'photo js-photo';
+//    let button = document.createElement('button');
+//    button.className = 'photo__botton-close hidden js-photo__botton-close';
+//    button.type = 'button';
+//    button.title = 'Закрыть';
+//    photo.prepend(button);
+//    photo.append(img);
+//    photoContainer.appendChild(photo)
+    
+//}
+const inputName = document.querySelector('.js-name-input');
+
+inputName.addEventListener('input', function() {
+    photoContainer.innerHTML = "";
+    if(event.target.value) {
+        photos_db.map((item, index) => {
+            if(item.name.toLowerCase().includes(event.target.value.toLowerCase())) {
+                let img = document.createElement('img');
+                img.className = 'js-img-photo';
+                img.src = 'photos/' + item.src;
+                let photo = document.createElement('div');
+                photo.className = 'photo js-photo';
+                let title = document.createElement('h4');
+                title.prepend(item.name);
+                let city = document.createElement('p');
+                city.prepend(item.city);
+                let button = document.createElement('button');
+                button.className = 'photo__botton-close hidden js-photo__botton-close';
+                button.type = 'button';
+                button.title = 'Закрыть';
+                photo.prepend(city);
+                photo.prepend(title);
+                photo.prepend(button);
+                photo.append(img);
+                photoContainer.prepend(photo) 
+            }
+        })
+    } else if (!event.target.value) {
+        photoContainer.innerHTML = "";
+        photos_db.map((item, index) => {
+                let img = document.createElement('img');
+                img.className = 'js-img-photo';
+                img.src = 'photos/' + item.src;
+                let photo = document.createElement('div');
+                photo.className = 'photo js-photo';
+                let title = document.createElement('h4');
+                title.prepend(item.name);
+                let city = document.createElement('p');
+                city.prepend(item.city);
+                let button = document.createElement('button');
+                button.className = 'photo__botton-close hidden js-photo__botton-close';
+                button.type = 'button';
+                button.title = 'Закрыть';
+                photo.prepend(city);
+                photo.prepend(title);
+                photo.prepend(button);
+                photo.append(img);
+                photoContainer.prepend(photo);
+        })
+    }
+    });
 
 const citySearchInput = document.querySelector('.js-photographers-select-city__input');
 const citySearchSelectList = document.querySelector('.js-photographers-select-city__list');
@@ -139,7 +227,8 @@ citySearchInput.addEventListener('click', () => {
 
     for(let i = 0; i < photo.length; i++) {
         photo[i].addEventListener('click', function(evt) {
-            event.preventDefault;
+            event.preventDefault();
+            event.stopPropagation();
             this.classList.toggle('photo-popup-open');
             this.firstElementChild.classList.toggle('hidden');
             this.lastElementChild.classList.toggle('img-full-screen');
