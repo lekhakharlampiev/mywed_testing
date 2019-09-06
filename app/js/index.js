@@ -123,7 +123,7 @@ let photos_db = [
 
 const photoContainer = document.querySelector('.js-photos__container');
 //рендерятся все фотографии по умолчанию
-photos_db.map((item, index) => {
+photos_db.map((item) => {
     let img = document.createElement('img');
     img.className = 'js-img-photo';
     img.src = 'photos/' + item.src;
@@ -153,7 +153,7 @@ const citeSelectItem = document.querySelectorAll('.js-photographers-select-city_
 inputName.addEventListener('input', function() {
     photoContainer.innerHTML = "";
     if(event.target.value && !citySearchInput.value) {
-        photos_db.map((item, index) => {
+        photos_db.map((item) => {
             if(item.name.toLowerCase().includes(event.target.value.toLowerCase())) {
                 let img = document.createElement('img');
                 img.className = 'js-img-photo';
@@ -177,7 +177,7 @@ inputName.addEventListener('input', function() {
         }) 
     }
     else if (event.target.value && citySearchInput.value) {
-            photos_db.map((item, index) => {
+            photos_db.map((item) => {
             if(item.name.toLowerCase().includes(event.target.value.toLowerCase()) && item.city.toLowerCase().includes(citySearchInput.value.toLowerCase())) {
                 let img = document.createElement('img');
                 img.className = 'js-img-photo';
@@ -203,7 +203,7 @@ inputName.addEventListener('input', function() {
     
     else if (!event.target.value) {
         photoContainer.innerHTML = "";
-        photos_db.map((item, index) => {
+        photos_db.map((item) => {
                 let img = document.createElement('img');
                 img.className = 'js-img-photo';
                 img.src = 'photos/' + item.src;
@@ -230,7 +230,7 @@ inputName.addEventListener('input', function() {
 const searchByCity = (value) => {
     photoContainer.innerHTML = "";
     if(value) {
-        photos_db.map((item, index) => {
+        photos_db.map((item) => {
             if(item.city.toLowerCase().includes(value.toLowerCase())) {
                 let img = document.createElement('img');
                 img.className = 'js-img-photo';
