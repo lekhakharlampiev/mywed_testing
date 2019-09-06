@@ -14,8 +14,8 @@ gulp.task('clean', function() {
 gulp.task('build', gulp.series('clean', 'assets'));
 gulp.task('server', function() {
     browserSync.init({
-        server: 'dist'
+        server: 'app'
     });
-    browserSync.watch('dist/**/*.*').on('change', browserSync.reload);
+    browserSync.watch('app/**/*.*').on('change', browserSync.reload);
 });
 
