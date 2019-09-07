@@ -201,7 +201,7 @@ for(let i = 0; i < citeSelectItem.length; i++) {
 
 //фильтр по имени
 inputName.addEventListener('input', function() {
-    photoContainer.innerHTML = "";
+    photoContainer.innerHTML = '';
     if(event.target.value && !citySearchInput.value) {
         photos_db.map((item) => {
             if(item.name.toLowerCase().includes(event.target.value.toLowerCase())) {
@@ -225,9 +225,14 @@ inputName.addEventListener('input', function() {
                 photoContainer.prepend(photo) 
             }
         });
-
-        addListenerToPhoto(); 
-    }
+        addListenerToPhoto();
+    if(photoContainer.innerHTML === '') {
+        let message = document.createElement('div');
+        message.className = 'photographers__photos__message';
+        message.prepend('Совпадений не найдено');
+        photoContainer.prepend(message);
+    }    
+}
     else if (event.target.value && citySearchInput.value) {
             photos_db.map((item) => {
             if(item.name.toLowerCase().includes(event.target.value.toLowerCase()) && item.city.toLowerCase().includes(citySearchInput.value.toLowerCase())) {
@@ -251,8 +256,13 @@ inputName.addEventListener('input', function() {
                 photoContainer.prepend(photo); 
             }
         });
-            
-        addListenerToPhoto(); 
+        addListenerToPhoto();
+    if(photoContainer.innerHTML === '') {
+        let message = document.createElement('div');
+        message.className = 'photographers__photos__message';
+        message.prepend('Совпадений не найдено');
+        photoContainer.prepend(message);
+    }     
     } 
     
     else if (!event.target.value) {
