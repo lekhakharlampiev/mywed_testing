@@ -123,8 +123,7 @@ let photos_db = [
 
 const photoContainer = document.querySelector('.js-photos__container');
 
-
-//рендер всех фото по умолчанию
+//рендер всех фото по умолчанию:
 const renderPhotos = (arr) => {
     return arr.map((item) => {
         let img = document.createElement('img');
@@ -149,6 +148,23 @@ const renderPhotos = (arr) => {
 }
 renderPhotos(photos_db);
 
+const photo = document.querySelectorAll('.js-photo');
+
+//обработчик клика для фото
+const addListenerToPhoto = () => {
+    const photo = document.querySelectorAll('.js-photo');
+    for(let i = 0; i < photo.length; i++) {
+        photo[i].addEventListener('click', function(evt) {
+            event.preventDefault();
+            event.stopPropagation();
+            this.classList.toggle('photo-popup-open');
+            this.firstElementChild.classList.toggle('hidden');
+            this.lastElementChild.classList.toggle('img-full-screen');
+        });
+    }
+};
+addListenerToPhoto();
+
 const inputName = document.querySelector('.js-name-input');
 const citySearchInput = document.querySelector('.js-photographers-select-city__input');
 const citySearchSelectList = document.querySelector('.js-photographers-select-city__list');
@@ -168,26 +184,20 @@ sort.map((item) => {
     container.prepend(li);
 });
 };
+
 renderCitiesList(citySearchSelectList, photos_db);
 
 const citeSelectItem = document.querySelectorAll('.js-photographers-select-city__list__item');
 
-const photo = document.querySelectorAll('.js-photo');
-
-//обработчик клика для фото
-const addListenerToPhoto = () => {
-    const photo = document.querySelectorAll('.js-photo');
-    for(let i = 0; i < photo.length; i++) {
-        photo[i].addEventListener('click', function(evt) {
-            event.preventDefault();
-            event.stopPropagation();
-            this.classList.toggle('photo-popup-open');
-            this.firstElementChild.classList.toggle('hidden');
-            this.lastElementChild.classList.toggle('img-full-screen');
-        });
-    }
-};
-addListenerToPhoto();
+//если выбирается какой то город то срабатывает фильтр по городу
+for(let i = 0; i < citeSelectItem.length; i++) {
+    citeSelectItem[i].addEventListener('click', function() {
+        let input = citySearchInput;
+        input.value = event.target.textContent;
+        searchByCity(input.value);
+        
+    });
+}
 
 //фильтр по имени
 inputName.addEventListener('input', function() {
@@ -215,6 +225,7 @@ inputName.addEventListener('input', function() {
                 photoContainer.prepend(photo) 
             }
         });
+
         addListenerToPhoto(); 
     }
     else if (event.target.value && citySearchInput.value) {
@@ -240,6 +251,7 @@ inputName.addEventListener('input', function() {
                 photoContainer.prepend(photo); 
             }
         });
+            
         addListenerToPhoto(); 
     } 
     
@@ -276,27 +288,11 @@ const searchByCity = (value) => {
                 photoContainer.prepend(photo) 
             }
         });
+
         addListenerToPhoto(); 
     }
-} 
-//если выбирается какой то город то срабатывает фильтр по городу
-for(let i = 0; i < citeSelectItem.length; i++) {
-    citeSelectItem[i].addEventListener('click', function() {
-        let input = citySearchInput;
-        input.value = event.target.textContent;
-        searchByCity(input.value);
-        
-    })
-}
+}; 
 
-//citySearchInput.addEventListener('click', function() {
-//    citySearchSelectList.classList.toggle('hidden');
-//        if (!citySearchSelectList.classList.contains('hidden')) {
-//            citySearchInput.classList.add('photographers-select-city__input_border-color');
-//        } else {
-//            citySearchInput.classList.remove('photographers-select-city__input_border-color');
-//        }
-//    });
 const buttonReset = document.querySelector('.js-reset-filter__button');
 
 buttonReset.addEventListener('click', function() {
