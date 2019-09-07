@@ -310,4 +310,5 @@ buttonReset.addEventListener('click', function() {
     citySearchInput.value = '';
     photoContainer.innerHTML = "";
     renderPhotos(photos_db);
+    addListenerToPhoto();
 });
