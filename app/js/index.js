@@ -149,6 +149,29 @@ const renderPhotos = (arr) => {
 }
 renderPhotos(photos_db);
 
+const inputName = document.querySelector('.js-name-input');
+const citySearchInput = document.querySelector('.js-photographers-select-city__input');
+const citySearchSelectList = document.querySelector('.js-photographers-select-city__list');
+
+//рендел списка городов 
+const renderCitiesList = (container, array) => {
+let sort = [];
+for(let i = 0; i < array.length; i++) {
+    if(!sort.includes(array[i].city)) {
+        sort.push(array[i].city);
+    }
+}
+sort.map((item) => {
+    let li = document.createElement('li');
+    li.className = 'photographers-select-city__list__item js-photographers-select-city__list__item';
+    li.prepend(item);
+    container.prepend(li);
+});
+};
+renderCitiesList(citySearchSelectList, photos_db);
+
+const citeSelectItem = document.querySelectorAll('.js-photographers-select-city__list__item');
+
 const photo = document.querySelectorAll('.js-photo');
 
 //обработчик клика для фото
@@ -165,11 +188,6 @@ const addListenerToPhoto = () => {
     }
 };
 addListenerToPhoto();
-
-const inputName = document.querySelector('.js-name-input');
-const citySearchInput = document.querySelector('.js-photographers-select-city__input');
-const citySearchSelectList = document.querySelector('.js-photographers-select-city__list');
-const citeSelectItem = document.querySelectorAll('.js-photographers-select-city__list__item');
 
 //фильтр по имени
 inputName.addEventListener('input', function() {
@@ -271,11 +289,19 @@ for(let i = 0; i < citeSelectItem.length; i++) {
     })
 }
 
-citySearchInput.addEventListener('click', function() {
-    citySearchSelectList.classList.toggle('hidden');
-        if (!citySearchSelectList.classList.contains('hidden')) {
-            citySearchInput.classList.add('photographers-select-city__input_border-color');
-        } else {
-            citySearchInput.classList.remove('photographers-select-city__input_border-color');
-        }
-    });
+//citySearchInput.addEventListener('click', function() {
+//    citySearchSelectList.classList.toggle('hidden');
+//        if (!citySearchSelectList.classList.contains('hidden')) {
+//            citySearchInput.classList.add('photographers-select-city__input_border-color');
+//        } else {
+//            citySearchInput.classList.remove('photographers-select-city__input_border-color');
+//        }
+//    });
+const buttonReset = document.querySelector('.js-reset-filter__button');
+
+buttonReset.addEventListener('click', function() {
+    inputName.value = '';
+    citySearchInput.value = '';
+    photoContainer.innerHTML = "";
+    renderPhotos(photos_db);
+});
