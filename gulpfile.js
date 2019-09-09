@@ -6,6 +6,7 @@ const browserSync = require('browser-sync').create();
 const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify-es').default;
+const babel = require('gulp-babel');
 
 const cssFiles = [
     './app/css/fonts.css',
@@ -32,6 +33,9 @@ gulp.task('styles', function() {
 gulp.task('js', function() {
     return gulp.src(jsFiles)
     .pipe(concat('script.js'))
+    .pipe(babel({
+        presets: ['@babel/env']
+    }))
     .pipe(uglify({
         toplevel: true
     }))
