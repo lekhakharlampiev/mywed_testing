@@ -1,3 +1,6 @@
+.main {
+    margin-bottom: 50px;
+}
 .photographers {
     display: flex;
     flex-direction: column;

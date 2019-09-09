@@ -2,6 +2,7 @@
 @import url('normalize.css');
 @import url('header.css');
 @import url('main.css');
+@import url('media_queries.css');
 .body {
     margin: 0;
     padding: 0;
