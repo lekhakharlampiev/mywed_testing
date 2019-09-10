@@ -1,3 +1,5 @@
+'use strict'
+
 let photos_db = [
     {
         id: "5c408b7c4465e774e0633f0b",

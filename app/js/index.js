@@ -1,3 +1,6 @@
+
+(function () {
+
 const photoContainer = document.querySelector('.js-photos__container');
 
 //рендер всех фото по умолчанию:
@@ -189,3 +192,4 @@ buttonReset.addEventListener('click', function() {
     renderPhotos(photos_db);
     addListenerToPhoto();
 });
+})();
